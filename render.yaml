@@ -1,0 +1,18 @@
+services:
+  - type: worker
+    name: avito-radar-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    plan: free
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: CHECK_INTERVAL
+        value: "90"
+      - key: DATA_FILE
+        value: "/var/data/data.json"
+    disk:
+      name: avito-radar-data
+      mountPath: /var/data
+      sizeGB: 1
